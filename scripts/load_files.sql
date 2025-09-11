@@ -1,63 +1,78 @@
 -- CAMBIA RUTAS A LAS RUTAS QUE TÚ TENGAS
-TRUNCATE TABLE bronze.crm_cust_info;
-BULK INSERT bronze.crm_cust_info
-FROM 'C:\Users\emils\Desktop\LCD\Séptimo\Minería\EJERCICIO_SSSM\source_crm\cust_info.csv'
-WITH (
-	FIRSTROW = 2,
-	FIELDTERMINATOR = ',',
-	TABLOCK
-);
-SELECT COUNT(*) FROM bronze.crm_cust_info
 
-TRUNCATE TABLE bronze.crm_sales_details;
-BULK INSERT bronze.crm_sales_details
-FROM 'C:\Users\emils\Desktop\LCD\Séptimo\Minería\EJERCICIO_SSSM\source_crm\sales_details.csv'
-WITH (
-	FIRSTROW = 2,
-	FIELDTERMINATOR = ',',
-	TABLOCK
-);
-SELECT * FROM bronze.crm_sales_details
+EXEC bronze.load_bronze
 
-TRUNCATE TABLE bronze.crm_prd_info;
-BULK INSERT bronze.crm_prd_info
-FROM 'C:\Users\emils\Desktop\LCD\Séptimo\Minería\EJERCICIO_SSSM\source_crm\prd_info.csv'
-WITH (
-	FIRSTROW = 2,
-	FIELDTERMINATOR = ',',
-	TABLOCK
-);
-SELECT * FROM bronze.crm_prd_info
+CREATE OR ALTER PROCEDURE bronze.load_bronze AS
+BEGIN
+	PRINT '=+=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*==*=*=*=*=*=*=';
+	PRINT 'Loading Bronze layer'
+	PRINT '=+=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*==*=*=*=*=*=*=';
+	PRINT '-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_';
+	PRINT 'Loading CRM Tables '
+	PRINT '-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_';
+	TRUNCATE TABLE bronze.crm_cust_info;
+	BULK INSERT bronze.crm_cust_info
+	FROM 'C:\Users\emils\Desktop\LCD\Séptimo\Minería\EJERCICIO_SSSM\source_crm\cust_info.csv'
+	WITH (
+		FIRSTROW = 2,
+		FIELDTERMINATOR = ',',
+		TABLOCK
+	);
+	SELECT COUNT(*) FROM bronze.crm_cust_info
+
+	TRUNCATE TABLE bronze.crm_sales_details;
+	BULK INSERT bronze.crm_sales_details
+	FROM 'C:\Users\emils\Desktop\LCD\Séptimo\Minería\EJERCICIO_SSSM\source_crm\sales_details.csv'
+	WITH (
+		FIRSTROW = 2,
+		FIELDTERMINATOR = ',',
+		TABLOCK
+	);
+	SELECT count(*) FROM bronze.crm_sales_details
+
+	TRUNCATE TABLE bronze.crm_prd_info;
+	BULK INSERT bronze.crm_prd_info
+	FROM 'C:\Users\emils\Desktop\LCD\Séptimo\Minería\EJERCICIO_SSSM\source_crm\prd_info.csv'
+	WITH (
+		FIRSTROW = 2,
+		FIELDTERMINATOR = ',',
+		TABLOCK
+	);
+	SELECT count(*) FROM bronze.crm_prd_info
 
 
 
--- SEGUNDA CARPETA 
-TRUNCATE TABLE bronze.erp_cust_az12;
-BULK INSERT bronze.erp_cust_az12
-FROM 'C:\Users\emils\Desktop\LCD\Séptimo\Minería\EJERCICIO_SSSM\source_erp\CUST_AZ12.csv'
-WITH (
-	FIRSTROW = 2,
-	FIELDTERMINATOR = ',',
-	TABLOCK
-);
-SELECT COUNT(*) FROM bronze.erp_cust_az12
+	-- SEGUNDA CARPETA 
+	PRINT '-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_';
+	PRINT 'Loading ERP Tables'
+	PRINT '-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_';
+	TRUNCATE TABLE bronze.erp_cust_az12;
+	BULK INSERT bronze.erp_cust_az12
+	FROM 'C:\Users\emils\Desktop\LCD\Séptimo\Minería\EJERCICIO_SSSM\source_erp\CUST_AZ12.csv'
+	WITH (
+		FIRSTROW = 2,
+		FIELDTERMINATOR = ',',
+		TABLOCK
+	);
+	SELECT COUNT(*) FROM bronze.erp_cust_az12
 
-TRUNCATE TABLE bronze.erp_loc_a101;
-BULK INSERT bronze.erp_loc_a101
-FROM 'C:\Users\emils\Desktop\LCD\Séptimo\Minería\EJERCICIO_SSSM\source_erp\LOC_A101.csv'
-WITH (
-	FIRSTROW = 2,
-	FIELDTERMINATOR = ',',
-	TABLOCK
-);
-SELECT * FROM bronze.erp_loc_a101
+	TRUNCATE TABLE bronze.erp_loc_a101;
+	BULK INSERT bronze.erp_loc_a101
+	FROM 'C:\Users\emils\Desktop\LCD\Séptimo\Minería\EJERCICIO_SSSM\source_erp\LOC_A101.csv'
+	WITH (
+		FIRSTROW = 2,
+		FIELDTERMINATOR = ',',
+		TABLOCK
+	);
+	SELECT count(*) FROM bronze.erp_loc_a101
 
-TRUNCATE TABLE bronze.erp_px_cat_g1v2;
-BULK INSERT bronze.erp_px_cat_g1v2
-FROM 'C:\Users\emils\Desktop\LCD\Séptimo\Minería\EJERCICIO_SSSM\source_erp\PX_CAT_G1V2.csv'
-WITH (
-	FIRSTROW = 2,
-	FIELDTERMINATOR = ',',
-	TABLOCK
-);
-SELECT * FROM bronze.erp_px_cat_g1v2
+	TRUNCATE TABLE bronze.erp_px_cat_g1v2;
+	BULK INSERT bronze.erp_px_cat_g1v2
+	FROM 'C:\Users\emils\Desktop\LCD\Séptimo\Minería\EJERCICIO_SSSM\source_erp\PX_CAT_G1V2.csv'
+	WITH (
+		FIRSTROW = 2,
+		FIELDTERMINATOR = ',',
+		TABLOCK
+	);
+	SELECT count(*) FROM bronze.erp_px_cat_g1v2
+END
