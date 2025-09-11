@@ -1,0 +1,12 @@
+-- CREAR LA BASE DE DATOS Y LOS ESQUEMAS
+USE master;
+CREATE DATABASE DataWarehouse;
+
+USE DataWarehouse;
+
+CREATE SCHEMA bronce;
+GO
+CREATE SCHEMA silver;
+GO
+CREATE SCHEMA gold;
+GO
