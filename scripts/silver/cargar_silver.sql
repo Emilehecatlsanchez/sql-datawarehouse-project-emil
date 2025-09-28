@@ -24,7 +24,7 @@ BEGIN
 
     INSERT INTO silver.crm_cust_info(
         cst_id,
-        cast_key,
+        cst_key,
         cst_firstname,
         cst_lastname,
         cst_marital_status,
@@ -33,7 +33,7 @@ BEGIN
     )
     SELECT 
         cst_id,
-        cast_key,
+        cst_key,
         TRIM(cst_firstname) AS cst_firstname,
         TRIM(cst_lastname) AS cst_lastname,
         CASE WHEN UPPER(TRIM(cst_marital_status)) = 'S' THEN 'Single'
@@ -108,15 +108,15 @@ BEGIN
         sls_cust_id,
         CASE 
             WHEN sls_order_dt = 0 OR LEN(sls_order_dt) != 8 THEN NULL
-            ELSE CAST(CAST(sls_order_dt AS VARCHAR) AS DATE)
+            ELSE cst(cst(sls_order_dt AS VARCHAR) AS DATE)
         END AS sls_order_dt,
         CASE 
             WHEN sls_ship_dt = 0 OR LEN(sls_ship_dt) != 8 THEN NULL
-            ELSE CAST(CAST(sls_ship_dt AS VARCHAR) AS DATE)
+            ELSE cst(cst(sls_ship_dt AS VARCHAR) AS DATE)
         END AS sls_ship_dt,
         CASE 
             WHEN sls_due_dt = 0 OR LEN(sls_due_dt) != 8 THEN NULL
-            ELSE CAST(CAST(sls_due_dt AS VARCHAR) AS DATE)
+            ELSE cst(cst(sls_due_dt AS VARCHAR) AS DATE)
         END AS sls_due_dt,
         CASE 
             WHEN sls_sales IS NULL OR sls_sales <= 0 OR sls_sales != sls_quantity * ABS(sls_price) 
