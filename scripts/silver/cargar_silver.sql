@@ -198,9 +198,9 @@ BEGIN
     FROM bronze.erp_px_cat_g1v2;
 
 END
-
+GO
 
 EXEC silver.load_silver;
-
+GO
 SELECT COUNT(*) FROM silver.crm_cust_info;
 SELECT COUNT(*) FROM silver.crm_sales_details;
